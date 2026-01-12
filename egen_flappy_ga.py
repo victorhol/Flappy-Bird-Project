@@ -4,12 +4,11 @@ import torch.nn as nn
 import random
 from Flappy_bird_Game import Bird, Tunnel
 
-
 POP_SIZE = 100 #Størrelse på populationen
-GENERATIONS = 100 #Antal generationer
+GENERATIONS = 50 #Antal generationer
 MUT_RATE = 0.1 #Mutationsrate
 SCALE = 0.2 #Hvor meget mutationerne skal påvirke genomet
-MAX_FRAMES = 5000 #Maksimalt antal frames per spil
+MAX_FRAMES = 20000 #Maksimalt antal frames per spil
 
 class FlappyNet(nn.Module):
     def __init__(self):
@@ -89,7 +88,7 @@ def evaluate_fitness(net):
         if bird.y < 0 or bird.y > H:
             bird.alive = False
 
-    return frames + (score * 1000), flaps #Returnerer fitness score (baseret på antal frames og score) og antal flaps og at gange med 1000 gør at score vægter mere i fitness evalueringen og kan evt ændres til at gøre den mere eller mindre vigtig
+    return frames + (score * 500), flaps #Returnerer fitness score (baseret på antal frames og score) og antal flaps og at gange med 1000 gør at score vægter mere i fitness evalueringen og kan evt ændres til at gøre den mere eller mindre vigtig
 
 def mutate(genome, MUT_RATE, SCALE):
     for i in range(len(genome)): #Kører gennem alle gener i genomet
