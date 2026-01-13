@@ -5,7 +5,7 @@ import random
 from Flappy_bird_Game import Bird, Tunnel
 
 POP_SIZE = 100 #Størrelse på populationen
-GENERATIONS = 50 #Antal generationer
+GENERATIONS = 100 #Antal generationer
 MUT_RATE = 0.1 #Mutationsrate
 SCALE = 0.2 #Hvor meget mutationerne skal påvirke genomet
 
@@ -59,7 +59,6 @@ def evaluate_fitness(net):
     tunnels = [Tunnel.random(W + i*250, 70, 150, H, margin=60, speed=3) for i in range(3)] #Opretter en liste med 3 tilfældige tunneler, der er jævnt fordelt i x-aksen
 
     score, frames = 0, 0
-    flaps = 0 
 
     while bird.alive:
         frames += 1
@@ -71,7 +70,6 @@ def evaluate_fitness(net):
 
         if should_flap(net, state):
             bird.flap()
-            flaps += 1
 
         bird.update()
 
@@ -87,7 +85,7 @@ def evaluate_fitness(net):
         if bird.y < 0 or bird.y > H:
             bird.alive = False
 
-    return frames + (score * 500), flaps #Returnerer fitness score (baseret på antal frames og score) og antal flaps og at gange med 1000 gør at score vægter mere i fitness evalueringen og kan evt ændres til at gøre den mere eller mindre vigtig
+    return frames + (score * 500), score #Returnerer fitness score (baseret på antal frames og score) og antal rør (score)
 
 def mutate(genome, MUT_RATE, SCALE):
     for i in range(len(genome)): #Kører gennem alle gener i genomet
@@ -101,20 +99,20 @@ def run_generation(population):
 
 #1 evaluerer fitness for hvert netværk i populationen
     for net in population:
-        fitness, flaps = evaluate_fitness(net) #Evaluerer fitness for hvert netværk ved at kalde evaluate_fitness funktionen der simulerer et spil Flappy Bird
-        scored_population.append((net, fitness, flaps)) #Tilføjer en tuple af netværket og dets fitness score til scored_population listen
+        fitness, pipes = evaluate_fitness(net) #Evaluerer fitness for hvert netværk ved at kalde evaluate_fitness funktionen der simulerer et spil Flappy Bird
+        scored_population.append((net, fitness, pipes)) #Tilføjer en tuple af netværket, fitness score og antal rør (pipes)
     
 #2 sorterer populationen baseret på fitness score
 
     scored_population.sort(key=lambda x:x[1], reverse=True) #Sorterer listen baseret på fitness score i faldende rækkefølge og lambda funktionen bruges til at specificere at sorteringen skal ske baseret på det andet element i tuplen (fitness score)
     best_fitness = scored_population[0][1]
-    best_flaps = scored_population[0][2]
+    best_pipes = scored_population[0][2]
     avg_fitness = sum(x[1] for x in scored_population) / len(scored_population)
-    print(f"Bedste fitness: {best_fitness}, Gennemsnitlig fitness: {avg_fitness}| Best flaps: {best_flaps}")
+    print(f"Bedste fitness: {best_fitness}, Gennemsnitlig fitness: {avg_fitness} | Best pipes: {best_pipes}")
 
-#3 Behold top 20% af populationen, altså "eliten"
+#3 Behold top 5% af populationen, altså "eliten"
 
-    elite_count = max(1, int(0.02*POP_SIZE)) #ATallet 0,02 udvælger de 2% bedste af de 100 fugle #Beregner antal netværk der skal bevares som elite (mindst 1) og max funktionen sikrer at der altid er mindst 1 elite netværk
+    elite_count = max(1, int(0.05*POP_SIZE)) #ATallet 0,05 udvælger de 5% bedste af de 100 fugle #Beregner antal netværk der skal bevares som elite (mindst 1) og max funktionen sikrer at der altid er mindst 1 elite netværk
     elites = scored_population[:elite_count] #Beholder de top elite_count netværk fra den sorterede liste ved at slice listen
 
     new_population = [] #Opretter en ny tom liste til den nye population
