@@ -8,7 +8,6 @@ POP_SIZE = 100 #Størrelse på populationen
 GENERATIONS = 50 #Antal generationer
 MUT_RATE = 0.1 #Mutationsrate
 SCALE = 0.2 #Hvor meget mutationerne skal påvirke genomet
-MAX_FRAMES = 20000 #Maksimalt antal frames per spil
 
 class FlappyNet(nn.Module):
     def __init__(self):
@@ -62,7 +61,7 @@ def evaluate_fitness(net):
     score, frames = 0, 0
     flaps = 0 
 
-    while bird.alive and frames < MAX_FRAMES: #Kører spillet indtil fuglen dør eller maks antal frames er nået
+    while bird.alive:
         frames += 1
 
         t = min([t for t in tunnels if t.x + t.width > bird.x], key=lambda t: t.x) #Finder den nærmeste tunnel foran fuglen ved at filtrere tunnelerne og vælge den med den mindste x-værdi
