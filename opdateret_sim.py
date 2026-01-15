@@ -11,8 +11,8 @@ except ImportError:  # pandas is optional at runtime
 from Flappy_bird_Game import Bird, Tunnel
 
 POP_SIZE = 100 #Størrelse på populationen
-GENERATIONS = 40 #Antal generationer
-RUNS = 20 #Antal runs (hele træningsforløb)
+GENERATIONS = 0 #Antal generationer
+RUNS = 0 #Antal runs (hele træningsforløb)
 MUT_RATE = 0.1 #Mutationsrate
 SCALE = 0.2 #Hvor meget mutationerne skal påvirke genomet
 TARGET_PIPES = 999 #Stopper træning når bedste score (rør) når denne
@@ -177,8 +177,9 @@ def main():
     details_rows = []
 
     for run_idx in range(1, args.runs + 1):
-        random.seed(1000 + run_idx)
-        torch.manual_seed(1000 + run_idx)
+        seed = 1000 + run_idx + (args.elite_n * 1000)
+        random.seed(seed)
+        torch.manual_seed(seed)
 
         population = create_population() #Opretter den initiale population af neurale netværk
         run_highscore = 0
@@ -219,4 +220,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
