@@ -5,7 +5,7 @@ runs = 3
 generations = 35
 
 # Vi vil teste disse 3 scenarier
-scenarios = [3, 5]  # Top 1, Top 3, Top 5
+scenarios = [1, 3, 5]  # Top 1, Top 3, Top 5
 
 print("Starter eksperimentet...")
 
