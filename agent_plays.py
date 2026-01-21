@@ -11,8 +11,8 @@ except ImportError:  # pandas is optional at runtime
 from Flappy_bird_Game import Bird, Tunnel
 
 POP_SIZE = 100 #Størrelse på populationen
-GENERATIONS = 0 #Antal generationer
-RUNS = 0 #Antal runs (hele træningsforløb)
+GENERATIONS = 25 #Antal generationer som standard
+RUNS = 16 #Antal runs (hele træningsforløb) som standard
 MUT_RATE = 0.1 #Mutationsrate
 SCALE = 0.2 #Hvor meget mutationerne skal påvirke genomet
 TARGET_PIPES = 999 #Stopper træning når bedste score (rør) når denne
