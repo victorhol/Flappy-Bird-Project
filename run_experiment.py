@@ -1,7 +1,7 @@
 import os
 
-runs = 16
-generations = 25
+runs = 1
+generations = 5
 
 top_agents = [1, 3, 5]
 
@@ -16,4 +16,4 @@ for n in top_agents:
     
     os.system(cmd)
 
-print("\nThe eksperiment is done. The data can be found in the data_topN.csv file(s)")
+print("\nThe eksperiment is done. Data in data_top1.csv, data_top3.csv and data_top5.csv")
