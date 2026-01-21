@@ -12,7 +12,7 @@ for n in scenarios:
            f"--runs {runs} "
            f"--generations {generations} "
            f"--elite_n {n} "
-           f"--summary_csv data_top{n}.csv "
+           f"--summary_csv data_top{n}.csv ")
     
     os.system(cmd)
 
