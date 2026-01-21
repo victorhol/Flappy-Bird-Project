@@ -11,8 +11,8 @@ except ImportError:  # pandas is optional at runtime
 from Flappy_bird_Game import Bird, Tunnel
 
 POP_SIZE = 100 #Størrelse på populationen
-GENERATIONS = 25 #Antal generationer som standard
-RUNS = 16 #Antal runs (hele træningsforløb) som standard
+GENERATIONS = 25 #Antal generationer
+RUNS = 16 #Antal runs (hele træningsforløb)
 MUT_RATE = 0.1 #Mutationsrate
 SCALE = 0.2 #Hvor meget mutationerne skal påvirke genomet
 TARGET_PIPES = 999 #Stopper træning når bedste score (rør) når denne
@@ -210,13 +210,7 @@ def main():
                 r.update({"run": run_idx, "generation": gen})
                 details_rows.append(r)
 
-            """if gen_row["best_pipes"] >= TARGET_PIPES:
-                print(f"Run {run_idx}: stopper ved {TARGET_PIPES} pipes i generation {gen}")
-                break"""
-
     pd.DataFrame(summary_rows).to_csv(args.summary_csv, index=False)
-    pd.DataFrame(details_rows).to_csv(args.details_csv, index=False)
-    print(f"Skrev {args.summary_csv} og {args.details_csv}")
 
 if __name__ == "__main__":
     main()
