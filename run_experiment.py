@@ -5,7 +5,7 @@ generations = 25
 
 top_agents = [1, 3, 5]
 
-for n in scenarios:
+for n in top_agents:
     print(f"---Top {n}---")
     
     cmd = (f"python agent_plays.py "
