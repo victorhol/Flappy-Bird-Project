@@ -28,7 +28,7 @@ The AI is implemented using **PyTorch** (Neural Network) and a custom Genetic Al
 * **`play_yourself.py`**: A manual version of the game that allows a human to play using the spacebar/mouse. Useful for understanding the game physics.
 
 ### Data
-* **`Endelig_flappy_data_fil(1).xlsx - *.csv`**: These CSV files contain the raw data from our experimental runs (Generation, Average Score, Best Fitness, etc.).
+* **`Endelig_flappy_data_fil.xlsx - *.csv`**: These CSV files contain the raw data from our experimental runs (Generation, Average Score, Best Fitness, etc.).
 
 ---
 
