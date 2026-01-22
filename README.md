@@ -1,40 +1,28 @@
 # Flappy-Bird-Project
 
-# Flappy Bird AI - Genetic Algorithms and Elite Selection
+# ITIS Semester Project: Flappy Bird AI
 
-**Authors:** Sebastian Balling, Jonas Krüger, and Victor Holt  
-**Project:** ITIS Semester Project  
-**Date:** January 2026  
+**Group:** Sebastian Balling, Jonas Krüger, Victor Holt  
+**Date:** January 2026
 
-## Project Overview
-This repository contains the source code and data for our research project investigating the impact of **Elite Selection** size on the performance of a Genetic Algorithm (GA) training a neural network to play Flappy Bird.
+## About the Project
+This repository contains the code and data for our project on Genetic Algorithms. We built a Neuroevolution system to train an agent to play Flappy Bird from scratch. 
 
-The project compares three specific elite configurations:
-- **Top 1:** Only the single best agent reproduces.
-- **Top 3:** The top 3 agents reproduce.
-- **Top 5:** The top 5 agents reproduce.
+The main goal was to investigate how **Elite Selection** affects learning stability. Specifically, we compared keeping the Top 1, Top 3, and Top 5 agents between generations.
 
-The AI is implemented using **PyTorch** (Neural Network) and a custom Genetic Algorithm loop without crossover (mutation-only).
+## File Overview
 
-## Repository Structure
+Here is a quick breakdown of the files in the repo:
 
-### Core Logic
-* **`agent_plays.py`**: The main training script. It runs the genetic algorithm, initializes the population, handles mutation/selection, and logs performance data.
-* **`Flappy_bird_Game.py`**: The game engine. Contains the `Bird` and `Tunnel` classes, physics logic, and collision detection.
-* **`run_experiment.py`**: A wrapper script that automates the full experiment by running `agent_plays.py` sequentially for elite sizes 1, 3, and 5.
+* **`agent_plays.py`**: The main script. This runs the actual training loop, handles the neural network, mutation, and logging.
+* **`Flappy_bird_Game.py`**: Our implementation of the game itself (physics, collisions, pipes).
+* **`run_experiment.py`**: A helper script we wrote to run the full experiment automatically (it loops through Elite 1, 3, and 5 sequentially).
+* **`sample_size.py`**: Script used for the statistical power analysis (Cohen's f) to determine our sample size ($n=16$).
+* **`play_yourself.py`**: A manual version of the game if you want to test the physics yourself.
+* **`data_topN.csv`**: The raw data output from our experiments.
 
-### Analysis & Tools
-* **`sample_size.py`**: A statistical script that calculates Cohen's *f* (Effect Size) and performs an ANOVA Power analysis to determine the required sample size ($n=16$).
-* **`play_yourself.py`**: A manual version of the game that allows a human to play using the spacebar/mouse. Useful for understanding the game physics.
-
-### Data
-* **`Endelig_flappy_data_fil.xlsx - *.csv`**: These CSV files contain the raw data from our experimental runs (Generation, Average Score, Best Fitness, etc.).
-
----
-
-## Installation & Requirements
-
-To run the code, you need Python installed along with the following libraries:
+## Setup
+You need Python installed. We used the following libraries:
 
 ```bash
 pip install torch pygame pandas numpy statsmodels openpyxl
